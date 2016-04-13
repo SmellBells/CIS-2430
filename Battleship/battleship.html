@@ -1,0 +1,199 @@
+<html> 
+ <head>
+  <title> BattleShip </title>
+  <style>
+  body
+  {
+    text-align:center;
+  }
+  </style>
+  <script language='JavaScript'>
+  function Initialize()
+  {
+    
+    var PlacedSubs=0;
+	while(PlacedSubs < 10)
+	{
+	  var num= Math.random();
+	  num= num * 100;
+	  num++;
+	  num= Math.floor(num);
+	  theID = "C" + num;
+	  theCell=document.getElementById(theID);
+	  if(theCell.alt != "S")
+	  {
+	    theCell.alt="S";
+		PlacedSubs++;
+	  }
+	}
+	
+  }//Randomize Subs
+  function CheckClick(Num)
+  {
+    theID="C" + Num;
+	theCell=document.getElementById(theID);
+	theMissle=document.getElementById("missile")
+	theSunk=document.getElementById("sunk")
+	theBonus=document.getElementById("bonus")
+	if(theCell.alt == "S")
+	{
+	  theCell.src="hit.jpg";
+	  theCell.alt="xs";
+	  theMissle.value=eval(theMissle.value) + eval(theBonus.value);
+	  theSunk.value++;
+	  if(theSunk.value == 10)
+	  {
+	    alert("You Win");
+		self.location="battleship.html";
+	  }
+	}
+	else if (theCell.alt == "-")
+	{
+	  theCell.src="miss.jpg";
+	  theCell.alt="M";
+	  theMissle.value--;
+	  if(theMissle.value == 0)
+	  {
+	    alert("Game Over");
+		self.location="battleship.html";
+	  }
+	}
+	else if (theCell.alt == "M" || theCell.alt == "xs")
+	{
+	  alert("you already fired there!");
+	  theMissle.value--;
+	}
+  }// CheckClick
+  function ShowRadar()
+  {
+    for(i=1;i<=100;i++)
+	{
+	  theID="C" + i;
+	  theCell=document.getElementById(theID);
+	  if(theCell.alt == "S")
+	  {
+	    theCell.src="sub.jpg";
+	  }
+	}
+  }//ShowRadar
+  function DisableRadar()
+  {
+    for(i=1;i<=100;i++)
+	{
+	  theID="C" + i;
+	  theCell=document.getElementById(theID);
+	  if(theCell.alt == "S")
+	  {
+	    theCell.src="W.jpg";
+	  }
+	}
+  }//DisableRadar
+  function Mode(level)
+  {
+  theMissile=document.getElementById("missile")
+  theBonus=document.getElementById("bonus")
+  
+    if(level == "Nub")
+	{
+	  theMissile.value=50;
+	  theBonus.value=5;
+	}
+	else if(level == "Novice")
+	{
+	  theMissile.value=35;
+	  theBonus.value=4;
+	}
+	else if(level == "Inter")
+	{
+	  theMissile.value=25;
+	  theBonus.value=3;
+	}
+	else if(level == "Heroic")
+	{
+	  theMissile.value=15;
+	  theBonus.value=2;
+	}
+	else if(level == "Legendary")
+	{
+	  theMissile.value=5;
+	  theBonus.value=1;
+	}
+    
+  }//How many Missles you get
+  function KlingonwarriorMode()
+  {
+    theCell=document.getElementById(theID);
+	theMissle=document.getElementById("missile")
+	theSunk=document.getElementById("sunk")
+	var shot=0;
+    while(shot <= 75)
+	{
+	 var num= Math.random();
+	  num= num * 100;
+	  num++;
+	  num= Math.floor(num);
+	  theID = "C" + num;
+	  theCell=document.getElementById(theID);
+	 if(theCell.alt == "S")
+	 {
+	  theCell.src="hit.jpg";
+	  theCell.alt="xs";
+	  shot++;
+	  theSunk.value++;
+	  if(theSunk.value == 10)
+	  {
+	    alert("You Win!");
+		self.location="battleship.html";
+	  }
+	  }
+	 else if (theCell.alt == "-")
+	 {
+	  theCell.src="miss.jpg";
+	  theCell.alt="M";
+	  shot++;
+	  if(shot == 75 && theSunk.value < 10 )
+	  {
+	    alert("You Fail At Life!");
+		self.location="battleship.html";
+	  }
+	 }
+	 
+    }
+  }//KlingonwarriorMode
+  </script>
+  </head>
+  <body onload="Initialize()">
+  <h1> BattleShip </h1>
+  <table align=center>
+  <script language='JavaScript'>
+  
+  var i=1;
+  
+  for(row=1;row<=10;row++)
+  {
+    document.write("<tr>");
+	for(column=1;column<=10;column++)
+	{
+    document.write("<td><img src='W.jpg' id='C" + i + "' alt='-' onClick='CheckClick(" + i + ")'></td>");
+	i++;
+	}
+	 document.write("</tr>");
+  }
+ </script>
+</table>
+ Nub Mode:<input type="radio" value="Nub" name="Option" onClick="Mode('Nub')">
+ Novice Mode:<input type="radio" value="Novice" name="Option" checked onClick="Mode('Novice')">
+Intermediate Mode:<input type="radio" value="Inter" name="Option" onClick="Mode('Inter')">
+Heroic Mode:<input type="radio" value="Heroic" name="Option" onClick="Mode('Heroic')" >
+Legendary Mode:<input type="radio" value="Legendary" name="Option" onClick="Mode('Legendary')" >
+<p/>
+<input type="button" value="KlingonwarriorMode" onClick="KlingonwarriorMode()">
+<p/>
+Missiles:<input type="text" id="missile" size="3" readonly>
+Bonus:<input type="text" id="bonus" size="3" readonly>
+Subs Sunk:<input type="text" id="sunk" size="3" value="0" readonly>
+<p/>
+<input type="button" value="Radar" onClick="ShowRadar()">
+<input type="button" value="Disable Radar" onClick="DisableRadar()">
+</body>
+</html> 

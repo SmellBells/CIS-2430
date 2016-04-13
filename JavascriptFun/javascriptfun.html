@@ -1,0 +1,43 @@
+<html>
+ <head>
+  <title> JavaScript Fun! </title>
+  <style>
+  body
+  {
+    text-align:center;
+  }
+  </style>
+  <script language='JavaScript'>
+  function Mode(lyric)
+  {
+    frail=document.getElementById("Frail")
+    shadow=document.getElementById("Shadow")
+    ocean=document.getElementById("Ocean")
+	thetext=document.getElementById("lyrics")
+	if(lyric == "Frail")
+	{
+	  alert("Their First Album");
+	}
+	if(lyric == "Shadow")
+	{
+	  alert("Their Second Album");
+	}
+	if(lyric == "Ocean")
+	{
+	  alert("Their Third Album");
+	}
+    
+  }
+  </script>
+  </head>
+  <body>
+  <h1> As I Lay Dying </h1>
+  <img src="Frail Words Collapse.jpg" id="Frail" width=400 onClick="Mode('Frail')"> 
+  <img src="Shadows are security.jpg" id="Shadow" width=400 onClick="Mode('Shadow')">
+  <img src="An Ocean Between Us.jpg" id="Ocean" width=400 onClick="Mode('Ocean')">
+  
+  
+  </body>
+ </html>
+  
+  
